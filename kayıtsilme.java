@@ -33,12 +33,12 @@ public class kayıtsilme extends JFrame {
 
 
 		          String url = "jdbc:mysql://127.0.0.1:3306/otopark";
+ 
 
-
-		          String kullaniciad = "?";
+		          String kullaniciad = "root";
 
 		 
-		          String sifre = "?";
+		          String sifre = "toor";
 
 
 		          Connection con; 
@@ -49,14 +49,13 @@ public class kayıtsilme extends JFrame {
 		         
                    //Statement tanımlmaları.
 		          Statement st=con.createStatement();
-                          Statement st1=con.createStatement();
-                
-                  
-                  
-                  
+                  Statement st1=con.createStatement();
+                   
+                    
+                   
 		          System.out.println("Baglandi");
 		         
-		      
+		          
 		           String sql = "SELECT PLAKALAR FROM enson"; 
 	               ResultSet rs = st.executeQuery(sql);
 	               
@@ -64,7 +63,7 @@ public class kayıtsilme extends JFrame {
 	               
 			          String sql1 ="select count(*)from enson"; 
 			          ResultSet sonuc=st1.executeQuery(sql1);
-				     
+				      
 			          while(sonuc.next()) {
 			        index = sonuc.getInt(1);
 			         System.out.println(index);
@@ -96,7 +95,7 @@ public class kayıtsilme extends JFrame {
 			
 			this.setLocation(800, 20);
 			this.setResizable(false);
-			 p=new JPanel();
+			 p=new JPanel(); 
 		      p.setLayout(null); 
 		    
 		      tablo=new JTable(satır,sutun);
@@ -112,25 +111,28 @@ public class kayıtsilme extends JFrame {
          
 		 sil.addActionListener(new ActionListener() {
 			
-			@Override
+			@Override 
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				
 				if (tablo.getSelectedRow() != -1) {
-			            // remove selected row from the model
+			        
+					 
+					
 					int row = tablo.getSelectedRow();
+					
 					String value = tablo.getModel().getValueAt(row, 0).toString();
+				
 					 
 					  model.removeRow(tablo.getSelectedRow());
 					  String sql3 ="DELETE FROM enson WHERE PLAKALAR LIKE "+ "'"+value+"'";
-					  
+					   
 					  try {
 						  PreparedStatement st2=con.prepareStatement(sql3);
 						  st2.executeUpdate();
 					} catch (SQLException e) { 
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					} 
 			        } 
 			}
 		}); 
